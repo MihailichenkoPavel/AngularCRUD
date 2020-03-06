@@ -1,0 +1,44 @@
+<!-- <div>
+  <label>Product name:
+    <input #productName />
+  </label>
+  <button (click)="add(productName.value); productName.value=''">
+    add
+  </button>
+</div> -->
+
+<form [formGroup]="productForm" (ngSubmit)="onFormSubmit()">
+  <table>
+    <tr>
+      <td class="tbl1">
+        <input formControlName="Name" placeholder="Product Name">
+      </td>
+      <td class="tbl1">
+        <input formControlName="Category" placeholder="Category">
+      </td>
+      <td class="tbl1">
+        <input type="number" step="0.01" min="0" max="10" onchange="(function(el){el.value=parseFloat(el.value).toFixed(2);})(this)" formControlName="Price" placeholder="Price">
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="content-center">
+        <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Add</button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<div class="list-group" *ngFor="let product of products">
+  <div class="list-group-item list-group-item-action">
+    <div class="d-flex w-50 justify-content-between">
+      <h5 class="mb-1">{{product.Name}}</h5>
+    </div>
+    <p class="mb-1">{{product.Category}}</p>
+    <h3>{{product.Price | currency}}</h3>
+    <a routerLink="/detail/{{product.Id}}"><button type="button" class="btn btn-primary"
+        title="change product">Change</button></a>
+    <button type="button" class="btn btn-danger" title="delete product" (click)="delete(product)">Delete</button>
+  </div>
+</div>

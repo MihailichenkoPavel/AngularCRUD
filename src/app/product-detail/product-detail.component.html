@@ -1,0 +1,21 @@
+<div *ngIf="product">
+  <h2>{{product.Name | uppercase}} Details</h2>
+  <div><span>id: </span>{{product.Id}}</div>
+  <br>
+  <div>
+    <div class="form-group">
+      <label>Name</label>
+      <input class="form-control" [(ngModel)]="product.Name" placeholder="name" required>
+    </div>
+    <div class="form-group">
+      <label>Category</label>
+      <input class="form-control" [(ngModel)]="product.Category" placeholder="category" required>
+    </div>
+    <div class="form-group">
+      <label>Price</label>
+      <input type="number" onchange="(function(el){el.value=parseFloat(el.value).toFixed(2);})(this)" step="0.01" min="0" max="10" class="form-control" [(ngModel)]="product.Price" placeholder="price" required>
+    </div>
+  </div>
+  <button type="button" class="btn btn-light" (click)="goBack()">Go Back</button>
+  <button type="button" class="btn btn-success" [disabled]="!product.Name || !product.Category || !product.Price" (click)="save()">Save</button>
+</div>
